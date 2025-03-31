@@ -1,13 +1,33 @@
-import {createRouter, createWebHistory } from 'vue-router'
 
-import page1 from "./components/page1.vue"
-import page2 from "./components/page2.vue"
-import page3 from "./components/page3.vue"
+import { createRouter, createWebHistory } from 'vue-router'
+
+import userList from './components/userList.vue'
+import addUser from './components/addUser.vue'
+import userPage from './components/userPage.vue'
+
+import delUser from './components/userPages/delUser.vue'
+import changeName from './components/userPages/changeName.vue'
 
 const routes = [
-    {path:'/', component: page1, name:'pageOne'},
-    {path:'/second', component: page2, name:'pageTwo'},
-    {path:'/third', component: page3, name:'pageThree'}
+    {path:'/',component:userList,name:'userList'},
+    {path:'/addUser',component:addUser,name:'addUser'},
+    {
+        path:'/userPage/:id',
+        component:userPage,
+        name:'userPage',
+        children:[
+            {
+                path:'delUser',
+                component: delUser,
+                name: 'delUser',
+            },
+            {
+                path:'changeName',
+                component: changeName,
+                name: 'changeName',
+            }
+        ]
+    },
 ]
 
 export const router = createRouter({
